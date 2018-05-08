@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="resource-share-web:war">
+    <output-path>$PROJECT_DIR$/resource-share-web/target</output-path>
+    <root id="archive" name="resource-share-web-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="resource-share-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/resource-share.iml" filepath="$PROJECT_DIR$/resource-share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-share-admin/resource-share-admin.iml" filepath="$PROJECT_DIR$/resource-share-admin/resource-share-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-share-common/resource-share-common.iml" filepath="$PROJECT_DIR$/resource-share-common/resource-share-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-share-crawler/resource-share-crawler.iml" filepath="$PROJECT_DIR$/resource-share-crawler/resource-share-crawler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-share-service/resource-share-service.iml" filepath="$PROJECT_DIR$/resource-share-service/resource-share-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource-share-web/resource-share-web.iml" filepath="$PROJECT_DIR$/resource-share-web/resource-share-web.iml" />
+    </modules>
+  </component>
+</project>

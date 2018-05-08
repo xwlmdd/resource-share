@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdd.share.mapper.EbookMapper" >
+  <resultMap id="BaseResultMap" type="com.mdd.share.model.Ebook" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ebook_name" property="ebookName" jdbcType="VARCHAR" />
+    <result column="download_url" property="downloadUrl" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="is_chinese" property="isChinese" jdbcType="BIT" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="is_publish" property="isPublish" jdbcType="BIT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mdd.share.model.Ebook" extends="BaseResultMap" >
+    <result column="catalog" property="catalog" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ebook_name, download_url, pic_url, score, is_chinese, kind, is_publish, update_time, 
+    create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    catalog
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ebook
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByIds" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ebook
+    where id IN
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </select>
+
+  <select id="getAllEbook" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ebook
+  </select>
+
+
+  <select id="recommendEbook" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from
+      ebook
+    WHERE
+      kind = #{kind}
+    ORDER BY score limit #{limit}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ebook
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mdd.share.model.Ebook" >
+    insert into ebook (ebook_name, download_url,
+      pic_url, score, is_chinese, 
+      kind, is_publish, update_time, 
+      create_time, catalog)
+    values (#{ebookName,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR},
+      #{picUrl,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{isChinese,jdbcType=BIT}, 
+      #{kind,jdbcType=VARCHAR}, #{isPublish,jdbcType=BIT}, now(),
+      now(), #{catalog,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.mdd.share.model.Ebook" >
+    insert into ebook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ebookName != null" >
+        ebook_name,
+      </if>
+      <if test="downloadUrl != null" >
+        download_url,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="isChinese != null" >
+        is_chinese,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="isPublish != null" >
+        is_publish,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="catalog != null" >
+        catalog,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ebookName != null" >
+        #{ebookName,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="isChinese != null" >
+        #{isChinese,jdbcType=BIT},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="isPublish != null" >
+        #{isPublish,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="catalog != null" >
+        #{catalog,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mdd.share.model.Ebook" >
+    update ebook
+    <set >
+      <if test="ebookName != null" >
+        ebook_name = #{ebookName,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        download_url = #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="isChinese != null" >
+        is_chinese = #{isChinese,jdbcType=BIT},
+      </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="isPublish != null" >
+        is_publish = #{isPublish,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="catalog != null" >
+        catalog = #{catalog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mdd.share.model.Ebook" >
+    update ebook
+    set ebook_name = #{ebookName,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      is_chinese = #{isChinese,jdbcType=BIT},
+      kind = #{kind,jdbcType=VARCHAR},
+      is_publish = #{isPublish,jdbcType=BIT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      catalog = #{catalog,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mdd.share.model.Ebook" >
+    update ebook
+    set ebook_name = #{ebookName,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      is_chinese = #{isChinese,jdbcType=BIT},
+      kind = #{kind,jdbcType=VARCHAR},
+      is_publish = #{isPublish,jdbcType=BIT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
