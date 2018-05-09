@@ -1,10 +1,11 @@
 package com.mdd.share.crawler;
 
 import com.google.common.collect.Maps;
+import com.mdd.share.model.Blog;
+import com.mdd.share.service.BlogService;
 import com.mdd.share.service.NewestTitleService;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import com.mdd.share.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,10 +30,15 @@ public class LiangGuiZhaoBolgCrawler {
 
     private static final Integer FIX_THREAD_NUM = 5;
 
+    private static final String AUTHOR = "梁桂钊的博客";
+
     private static ExecutorService executorService = Executors.newFixedThreadPool(FIX_THREAD_NUM);
 
     @Resource
     private NewestTitleService newestTitleService;
+
+    @Resource
+    private BlogService blogService;
 
     private void crawl()  {
         Document document = null;
@@ -91,9 +97,26 @@ public class LiangGuiZhaoBolgCrawler {
                 log.error("fail invoke crawlPage Jsoup.connect blogUrl:{}",blogUrl,e);
                 continue;
             }
-            blogDocument.select("");
+            String publishTime = blogDocument.select("#main > article > header > p > time").attr("datetime");
+            String copyright = blogDocument.select("#main > article > div.article-footer-copyright").html();
+            Element contentElement = blogDocument.select("#main > article > div.article-content").get(0);
+            contentElement.removeClass("toc-article");
+            contentElement.removeClass("article-nav.clearfix");
+            String content = contentElement.html()+copyright;
 
-
+            Blog blog = new Blog();
+            blog.setAuthor(AUTHOR);
+            blog.setBlogUrl(blogUrl);
+            blog.setTitle(blogTitle);
+            blog.setContent(content);
+            blog.setKind(category);
+            blog.setIsPublish(0);
+            try {
+                blog.setPublishTime(CommonUtils.string4Date(publishTime));
+            }catch (Exception e){
+                log.error("fail invoke CommonUtils.string4Date publishTime:{}",publishTime,e);
+            }
+            blogService.saveBlog(blog);
         }
 
 
