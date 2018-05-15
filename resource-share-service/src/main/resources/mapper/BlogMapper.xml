@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mdd.share.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.mdd.share.model.Blog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="blog_url" property="blogUrl" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="is_publish" property="isPublish" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mdd.share.model.Blog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, kind, author, blog_url, publish_time, type, is_publish, create_time, update_time
+  </sql>
+
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="queryBlogByTitleAndTime" resultMap="ResultMapWithBLOBs"
+          parameterType="com.mdd.share.model.Blog">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where
+    title = #{title}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.mdd.share.model.Blog" >
+    insert into blog (title, kind, author, blog_url, publish_time,type, is_publish, create_time,update_time, content)
+    values (#{title,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR},
+      #{author,jdbcType=VARCHAR}, #{blogUrl,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP},
+      #{type,jdbcType=BIT}, #{isPublish,jdbcType=BIT}, now(),
+      now(), #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
+</mapper>
