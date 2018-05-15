@@ -5,7 +5,7 @@ import java.util.Date;
 public class NewestTitle {
     private Integer id;
 
-    private String key;
+    private String newestKey;
 
     private String newestTitle;
 
@@ -21,12 +21,12 @@ public class NewestTitle {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getNewestKey() {
+        return newestKey;
     }
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setNewestKey(String newestKey) {
+        this.newestKey = newestKey == null ? null : newestKey.trim();
     }
 
     public String getNewestTitle() {

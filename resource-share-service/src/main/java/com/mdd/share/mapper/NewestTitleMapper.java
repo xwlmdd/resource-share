@@ -7,13 +7,7 @@ public interface NewestTitleMapper {
 
     int insert(NewestTitle record);
 
-    int insertSelective(NewestTitle record);
-
     NewestTitle selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(NewestTitle record);
-
-    int updateByPrimaryKey(NewestTitle record);
-
-    NewestTitle queryNewestTitleByKey(String key);
+    NewestTitle queryNewestTitleByKey(String newestKey);
 }

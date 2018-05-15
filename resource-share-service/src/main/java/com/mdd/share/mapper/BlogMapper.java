@@ -11,9 +11,5 @@ public interface BlogMapper {
 
     Blog selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Blog record);
-
-    int updateByPrimaryKeyWithBLOBs(Blog record);
-
-    int updateByPrimaryKey(Blog record);
+    Blog queryBlogByTitleAndTime(Blog blog);
 }

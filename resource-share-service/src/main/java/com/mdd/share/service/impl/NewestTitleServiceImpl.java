@@ -21,11 +21,16 @@ public class NewestTitleServiceImpl implements NewestTitleService {
     public boolean isNewestBlog(String key,String blogTitle) {
         NewestTitle newestTitle = newestTitleMapper.queryNewestTitleByKey(key);
         if (Objects.isNull(newestTitle)){
-            return false;
-        }
-        if (Objects.equals(blogTitle,newestTitle.getNewestTitle())){
             return true;
         }
-        return false;
+        if (Objects.equals(blogTitle,newestTitle.getNewestTitle())){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void saveNewestTitle(NewestTitle newestTitle) {
+        newestTitleMapper.insert(newestTitle);
     }
 }
