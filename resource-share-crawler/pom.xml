@@ -5,7 +5,7 @@
 
 	<groupId>com.mdd.share</groupId>
 	<artifactId>resource-share-crawler</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>resource-share-crawler</name>
@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>com.mdd.share</groupId>
 			<artifactId>resource-share-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -103,11 +103,6 @@
 				</excludes>
 				<filtering>true</filtering>
 			</resource>
-			<!--<resource>-->
-			<!--<directory>src/main/resources/config/${env.type}/</directory>-->
-			<!--<targetPath>${project.build.outputDirectory}</targetPath>-->
-			<!--<filtering>true</filtering>-->
-			<!--</resource>-->
 		</resources>
 		<plugins>
 			<plugin>

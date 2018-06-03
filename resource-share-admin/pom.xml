@@ -5,8 +5,8 @@
 
 	<groupId>com.mdd.share</groupId>
 	<artifactId>resource-share-admin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>1.0</version>
+	<packaging>jar</packaging>
 
 	<name>resource-share-admin</name>
 	<description>Demo project for Spring Boot</description>
@@ -75,14 +75,14 @@
 		<dependency>
 			<groupId>com.mdd.share</groupId>
 			<artifactId>resource-share-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<!--resource-share-service-->
         <dependency>
             <groupId>com.mdd.share</groupId>
             <artifactId>resource-share-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -105,9 +105,9 @@
 				<filtering>true</filtering>
 			</resource>
 			<resource>
-				<directory>src/main/resources/config/${env.type}/</directory>
+				<directory>src/main/resources/config/${environment}</directory>
 				<targetPath>${project.build.outputDirectory}</targetPath>
-				<filtering>true</filtering>
+				<!--<filtering>true</filtering>-->
 			</resource>
 		</resources>
 		<plugins>
@@ -137,7 +137,54 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<executions>
+					<execution>
+						<id>make-zip</id>
+						<!-- 绑定到package生命周期阶段上 -->
+						<phase>package</phase>
+						<goals>
+							<!-- 绑定到package生命周期阶段上 -->
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>com.mdd.share.Application</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<descriptors> <!--描述文件路径-->
+								<descriptor>src/assembly/assembly.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<environment>dev</environment>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<environment>prod</environment>
+			</properties>
+		</profile>
+	</profiles>
+
 
 </project>
