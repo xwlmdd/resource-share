@@ -26,11 +26,7 @@
 <!--头部导航栏-->
 <#include "common/header.ftl">
 <div id="container">
-    <div class="fly-panel fly-column">
-    <div class="layui-container">
-        <!--导航栏-->
-    <#include "common/nav.ftl">
-    </div>
+    <div style="height: 15px"></div>
 </div>
     <div class="layui-container">
         <div id="primary" class="primary" role="main">

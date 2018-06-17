@@ -24,14 +24,11 @@
 <body style="">
 <!--头部导航栏-->
 <#include "common/header.ftl">
+
 <!--Pjax Start-->
 <div id="container">
-    <div class="fly-panel fly-column">
-        <div class="layui-container">
-            <!--导航栏-->
-            <#include "common/nav.ftl">
-        </div>
-    </div>
+    <div style="height: 15px"></div>
+    <#--<#include "common/search.ftl">-->
     <div class="layui-container">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
@@ -39,14 +36,13 @@
                     <#if paginator??>
                         <#list paginator.list as ebook>
                             <li class="wid261 hide-li-1">
-                                <div style="width: 80%;height: 80%;">
+                                <div style="width: 80%;">
                                     <a class="fly-case-img" href="getEbookDetail?id=${ebook.id}" data-pjax="">
                                         <img src="${ebook.picUrl}" style="margin-left: 15%;margin-top: 5%;">
-                                        <#--<cite class="layui-btn layui-btn-primary layui-btn-sm">去围观</cite>-->
                                     </a>
                                 </div>
 
-                                <div style="margin-left: 10%; height: 80%;">
+                                <div style="margin-left: 10%;">
                                     <h2 class="layui-elip" >
                                         <a href="getEbookDetail?id=${ebook.id}" data-pjax="">${ebook.ebookName}</a>
                                     </h2>
@@ -56,15 +52,6 @@
                                 </div>
                                 <hr>
                                 <div>
-                                    <#--<a href="getEbookDeatil?id=${ebook.id}" class="fly-case-user" data-pjax="">-->
-                                        <#--<img src="../images/1.png">-->
-                                    <#--</a>-->
-                                    <#--<p>-->
-                                        <#--评分:${ebook.score}-->
-                                    <#--</p>-->
-                                    <#--<p class="layui-elip" style="font-size: 12px;">-->
-                                        <#--${ebook.createTime?string('yyyy-MM-dd mm:ss')}-->
-                                    <#--</p>-->
                                     <div style="margin-left: 15%;">
                                          <a   href="getEbookDetail?id=${ebook.id}" class="layui-btn layui-btn-normal">详情信息</a>
                                          <a   href="${ebook.downloadUrl}" target="_blank" class="layui-btn  layui-btn-normal">立即下载</a>
