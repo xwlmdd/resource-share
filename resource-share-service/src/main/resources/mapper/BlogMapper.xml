@@ -57,4 +57,36 @@
       now(), #{content,jdbcType=LONGVARCHAR})
   </insert>
 
+  <select id="getAllBlog" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+  </select>
+
+  <select id="selectByIds" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where id IN
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </select>
+
+  <select id="recommendBlog" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from
+    blog
+    WHERE
+    kind = #{kind}
+    ORDER BY score limit #{limit}
+  </select>
+
 </mapper>
