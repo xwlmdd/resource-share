@@ -8,10 +8,10 @@
                 <a href="${request.contextPath}/blog/getAllBlog" data-pjax="">博客</a>
             </li>
             <li class="layui-nav-item">
-                <a href="${request.contextPath}/ebook/getAllEbook" data-pjax="">书籍分享</a>
+                <a href="${request.contextPath}/ebook/getAllEbook?type=0" data-pjax="">书籍分享</a>
             </li>
             <li class="layui-nav-item">
-                <a href="javascript:void(0);" data-pjax="">视频分享</a>
+                <a href="j${request.contextPath}/ebook/getAllEbook?type=1" data-pjax="">视频分享</a>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:void(0);" data-pjax="">牛人推荐</a>

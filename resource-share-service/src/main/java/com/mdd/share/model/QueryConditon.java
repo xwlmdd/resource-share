@@ -14,4 +14,5 @@ public class QueryConditon {
     private Integer page;
     private Integer limit;
     private String kind;
+    private Integer type;
 }

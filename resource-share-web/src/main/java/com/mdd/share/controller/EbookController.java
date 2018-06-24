@@ -33,17 +33,19 @@ public class EbookController {
 
     private static final String EBOOK_LIST_PAGE = "ebookList";
 
+    private static final Integer LIMIT = 2;
+
     @RequestMapping(value = "getAllEbook")
-    public String getAllEbook(Integer page, Integer limit, Model model){
-        log.info("invoke getAllEbook page:{},limit:{}",page,limit);
-        if (limit == null){
-            limit = 1;
+    public String getAllEbook(QueryConditon queryConditon, Model model){
+        log.info("invoke getAllEbook,queryConditon:{}",queryConditon);
+        if (queryConditon.getLimit() == null){
+            queryConditon.setLimit(1);
         }
-        if (page==null){
-            page = 1;
+        if (queryConditon.getPage() == null){
+            queryConditon.setPage(1);
         }
-        PageHelper.startPage(page, 2);
-        List<Ebook> list = ebookService.getAllEbook(new QueryConditon(page, limit, null));
+        PageHelper.startPage(queryConditon.getPage(), LIMIT);
+        List<Ebook> list = ebookService.getAllEbook(queryConditon);
         PageInfo<Ebook> ebooks = new PageInfo(list);
         model.addAttribute("paginator",ebooks);
         log.info("ebooks:{}",new Gson().toJson(ebooks));

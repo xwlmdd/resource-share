@@ -23,6 +23,8 @@ public class Ebook {
 
     private Integer isChinese;
 
+    private Integer type;
+
     private String kind;
 
     private Integer isPublish;
