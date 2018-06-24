@@ -15,6 +15,7 @@
         text-decoration: none;
         transition: background-color .3s;
         border: 1px solid #ddd;
+        height: 41px;
     }
 
     ul.pagination li a.active {

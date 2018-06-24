@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="baidu-site-verification" content="Z6vOHj2Lpk">
-        <title>美图 - 做全网最好的DJ音乐站</title>
+        <title>weShare - 乐于分享</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="keywords" content="">
         <meta name="description" content="">

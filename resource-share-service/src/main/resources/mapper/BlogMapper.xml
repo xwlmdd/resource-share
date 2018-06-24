@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mdd.share.model.Blog" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="kind" property="kind" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="blog_url" property="blogUrl" jdbcType="VARCHAR" />
@@ -17,7 +18,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, title, kind, author, blog_url, publish_time, type, is_publish, create_time, update_time
+    id, title,description, kind, author, blog_url, publish_time, type, is_publish, create_time, update_time
   </sql>
 
   <sql id="Blob_Column_List" >
@@ -50,8 +51,8 @@
   </delete>
 
   <insert id="insert" parameterType="com.mdd.share.model.Blog" >
-    insert into blog (title, kind, author, blog_url, publish_time,type, is_publish, create_time,update_time, content)
-    values (#{title,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR},
+    insert into blog (title,description, kind, author, blog_url, publish_time,type, is_publish, create_time,update_time, content)
+    values (#{title,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR},
       #{author,jdbcType=VARCHAR}, #{blogUrl,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP},
       #{type,jdbcType=BIT}, #{isPublish,jdbcType=BIT}, now(),
       now(), #{content,jdbcType=LONGVARCHAR})
@@ -86,7 +87,7 @@
     blog
     WHERE
     kind = #{kind}
-    ORDER BY score limit #{limit}
+    ORDER BY update_time limit #{limit}
   </select>
 
 </mapper>

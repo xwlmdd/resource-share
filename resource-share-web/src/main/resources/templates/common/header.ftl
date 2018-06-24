@@ -5,7 +5,7 @@
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
-                <a href="http://www.ivusic.com/index.html" data-pjax="">博客</a>
+                <a href="${request.contextPath}/blog/getAllBlog" data-pjax="">博客</a>
             </li>
             <li class="layui-nav-item">
                 <a href="${request.contextPath}/ebook/getAllEbook" data-pjax="">书籍分享</a>
