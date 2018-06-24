@@ -43,7 +43,7 @@ public class EbookController {
             page = 1;
         }
         PageHelper.startPage(page, 2);
-        List<Ebook> list = ebookService.getAllEbook(new QueryConditon(page, limit));
+        List<Ebook> list = ebookService.getAllEbook(new QueryConditon(page, limit, null));
         PageInfo<Ebook> ebooks = new PageInfo(list);
         model.addAttribute("paginator",ebooks);
         log.info("ebooks:{}",new Gson().toJson(ebooks));

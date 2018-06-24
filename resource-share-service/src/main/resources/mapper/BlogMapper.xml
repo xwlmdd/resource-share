@@ -64,6 +64,11 @@
     ,
     <include refid="Blob_Column_List" />
     from blog
+    <where>
+      <if test="kind != null">
+        kind = #{kind}
+      </if>
+    </where>
   </select>
 
   <select id="selectByIds" resultMap="ResultMapWithBLOBs" >
@@ -85,8 +90,11 @@
     <include refid="Blob_Column_List" />
     from
     blog
-    WHERE
-    kind = #{kind}
+    <where>
+      <if test="kind != null">
+        kind = #{kind}
+      </if>
+    </where>
     ORDER BY update_time limit #{limit}
   </select>
 
