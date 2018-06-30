@@ -25,7 +25,7 @@
 <body style="">
 <!--头部导航栏-->
 <#include "common/header.ftl">
-<div id="container">
+<div id="container1" style="padding-top: 35px">
     <div style="height: 15px"></div>
 </div>
     <div class="layui-container">
