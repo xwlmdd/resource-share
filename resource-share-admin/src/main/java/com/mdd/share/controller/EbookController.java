@@ -40,7 +40,6 @@ public class EbookController {
 
     @RequestMapping(value = "ebook/getAllEbook")
     public String getAllEbook(Integer page, Integer limit, Model model){
-        log.info("[][]");
         if (limit == null){
             limit = 1;
         }

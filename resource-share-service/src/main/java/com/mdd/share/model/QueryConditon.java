@@ -15,4 +15,9 @@ public class QueryConditon {
     private Integer limit;
     private String kind;
     private Integer type;
+
+    public QueryConditon(Integer page, Integer limit) {
+        this.page = page;
+        this.limit = limit;
+    }
 }

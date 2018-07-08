@@ -65,6 +65,16 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">类型：</label>
+                <div class="layui-input-block">
+                    <select name="type" lay-filter="aihao">
+                        <option value="1">书籍</option>
+                        <option value="2">视频</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">下载地址：</label>
                 <div class="layui-input-block">
                     <input type="text" name="downloadUrl" autocomplete="off" placeholder="请输入标题" class="layui-input">
